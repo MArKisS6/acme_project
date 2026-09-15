@@ -1,27 +1,36 @@
 {% extends "base.html" %}
- 
+{% load django_bootstrap5 %}
+
 
 {% block content %}
-  <div class="card col-4">
-    <div class="card-header">
-      Калькулятор ожидания дня рождения
-    </div>
-    <div class="card-body">
-      <form method="post">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% bootstrap_button button_type="submit" content="Отправить" %}
-      </form>
-    </div>
-  </div>
+  <!-- Переносим тег with в самое начало блока content. -->
   {% with data=form.instance %}
+    {% if '/edit/' in request.path %}
+      <!-- Вместо form.instance подставляем data. -->
+      <h1>Редактировать запись {{ data.pk }}</h1>
+    {% else %}
+      <h1>Создать запись</h1>
+    {% endif %}
+    <div class="card col-4">
+      <div class="card-header">
+        Калькулятор ожидания дня рождения
+      </div>
+      <div class="card-body">
+        <form method="post">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          {% bootstrap_button button_type="submit" content="Отправить" %}
+        </form>
+      </div>
+    </div>
     {% if form.is_valid %}
       ID записи в БД: {{ data.id }}
+      <hr>
       <h2>Привет, {{ data.first_name }} {{ data.last_name }}</h2>
       {% if birthday_countdown == 0 %}
-        С днём рождения!
+        <p>С днём рождения!</p>
       {% else %}
-        Осталось дней до дня рождения: {{ birthday_countdown }}!
+        <p>Осталось дней до дня рождения: {{ birthday_countdown }}!</p>
       {% endif %}
     {% endif %}
   {% endwith %}
