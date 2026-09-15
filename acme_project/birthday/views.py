@@ -11,6 +11,7 @@ def birthday(request):
     context = {'form': form}
     # Если форма валидна...
     if form.is_valid():
+        form.save()
         # ...вызовем функцию подсчёта дней:
         birthday_countdown = calculate_birthday_countdown(
             # ...и передаём в неё дату из словаря cleaned_data.
