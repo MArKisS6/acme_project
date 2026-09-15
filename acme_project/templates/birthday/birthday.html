@@ -16,6 +16,7 @@
   </div>
   {% with data=form.instance %}
     {% if form.is_valid %}
+    ID записи в БД: {{ data.id }}
       <h2>Привет, {{ data.first_name }} {{ data.last_name }}</h2>
       {% if birthday_countdown == 0 %}
         С днём рождения!
