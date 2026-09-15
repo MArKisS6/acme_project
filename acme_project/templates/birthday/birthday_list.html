@@ -1,0 +1,22 @@
+{% extends base.html %}
+
+Скопировать код
+HTML
+
+<!-- templates/birthday/birthday_list.html -->
+{% extends "base.html" %}
+
+{% block content %}
+  {% for birthday in birthdays %}
+    <div> <!-- Обернём каждую запись в тег div -->
+      <div> <!-- Текст обернём в отдельный вложенный div -->
+        {{ birthday.first_name }} {{ birthday.last_name }} - {{ birthday.birthday }}
+      </div>
+      {% if not forloop.last %}
+        <hr>
+      {% endif %}
+    </div>
+  {% endfor %}
+{% endblock %}
+
+
