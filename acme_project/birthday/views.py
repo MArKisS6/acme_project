@@ -6,7 +6,7 @@ from .utils import calculate_birthday_countdown
 
 
 def birthday(request):
-    form = BirthdayForm(request.GET or None)
+    form = BirthdayForm(request.POST or None)
     # Создаём словарь контекста сразу после инициализации формы.
     context = {'form': form}
     # Если форма валидна...
