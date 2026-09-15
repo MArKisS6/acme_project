@@ -7,7 +7,7 @@
       Калькулятор ожидания дня рождения
     </div>
     <div class="card-body">
-      <form method="post"
+      <form method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% bootstrap_button button_type="submit" content="Отправить" %}
