@@ -14,7 +14,7 @@
       </form>
     </div>
   </div>
-  {% with data=request.GET %}
+  {% with data=request.POST %}
     {% if form.is_valid %}
       <h2>Привет, {{ data.first_name }} {{ data.last_name }}</h2>
       {% if birthday_countdown == 0 %}
