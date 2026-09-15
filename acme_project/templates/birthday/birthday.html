@@ -14,7 +14,7 @@
       </form>
     </div>
   </div>
-  {% with data=request.POST %}
+  {% with data=form.instance %}
     {% if form.is_valid %}
       <h2>Привет, {{ data.first_name }} {{ data.last_name }}</h2>
       {% if birthday_countdown == 0 %}
