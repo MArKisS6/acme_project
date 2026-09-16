@@ -38,17 +38,6 @@ def birthday_list(request):
     return render(request, 'birthday/birthday_list.html', context)
 
 
-Перенесите код в свой проект.
-Скопировать код
-PYTHON
-
-# birthday/views.py
-# Дополнительно импортируйте шорткат для редиректа.
-from django.shortcuts import get_object_or_404, redirect, render
-
-...
-
-
 def delete_birthday(request, pk):
     # Получаем объект модели или выбрасываем 404 ошибку.
     instance = get_object_or_404(Birthday, pk=pk)
