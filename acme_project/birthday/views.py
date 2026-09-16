@@ -54,3 +54,4 @@ def delete_birthday(request, pk):
     # Если был получен GET-запрос — отображаем форму.
     return render(request, 'birthday/birthday.html', context)
 
+
