@@ -1,19 +1,31 @@
 {% extends "base.html" %}
 
-
 {% block content %}
-  {% for birthday in birthdays %}
-    <div> <!-- Обернём каждую запись в тег div -->
-      <div> <!-- Текст обернём в отдельный вложенный div -->
-        {{ birthday.first_name }} {{ birthday.last_name }} - {{ birthday.birthday }}
+  {% for birthday in page_obj %}
+    <div class="row">   
+
+      <div class="col-2">  
+        {% if birthday.image %}
+          <img src="{{ birthday.image.url }}" height=100>
+        {% endif %}
       </div>
-      <div>
-        <a href="{% url 'birthday:edit' birthday.id %}">Изменить запись</a>
-        <a href="{% url 'birthday:delete' birthday.id %}">Удалить запись</a>
+
+      <div class="col-10">  
+        <div>
+          {{ birthday.first_name }} {{ birthday.last_name }} - {{ birthday.birthday }}
+        </div>      
+        <div>
+          <a href="{% url 'birthday:edit' birthday.id %}">Изменить запись</a> | <a href="{% url 'birthday:delete' birthday.id %}">Удалить запись</a>
+        </div>
       </div>
+
       {% if not forloop.last %}
-        <hr>
+        <hr class="mt-3">
       {% endif %}
     </div>
   {% endfor %}
+
+  <!-- Подключаем пагинатор -->
+  {% include "includes/paginator.html" %}
+
 {% endblock %}
