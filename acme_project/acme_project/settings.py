@@ -10,6 +10,12 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'users.MyUser'
 
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
+
+
+LOGIN_REDIRECT_URL = 'pages:homepage'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -82,9 +88,7 @@ LANGUAGE_CODE = 'ru-RU'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 STATIC_URL = '/static/'
