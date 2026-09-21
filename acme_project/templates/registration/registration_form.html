@@ -4,14 +4,14 @@
 {% block content %}
   <div class="card col-4 m-3">
     <div class="card-header">
-      Восстановление пароля
+      Регистрация пользователя
     </div>
     <div class="card-body">
       <form method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
-        {% bootstrap_button button_type="submit" content="Поменять пароль" %}
+        {% bootstrap_button button_type="submit" content="Зарегистрироваться" %}
       </form>
     </div>
   </div>
-{% endblock %}
+{% endblock %} 
