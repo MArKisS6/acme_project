@@ -15,7 +15,7 @@ class BirthdayListView(ListView):
     paginate_by = 10
 
 
-class BirthdayCreateView(LoginRequiredMixin,CreateView):
+class BirthdayCreateView(LoginRequiredMixin, CreateView):
     model = Birthday
     form_class = BirthdayForm
     
@@ -26,12 +26,12 @@ class BirthdayCreateView(LoginRequiredMixin,CreateView):
         return super().form_valid(form)
 
 
-class BirthdayUpdateView(LoginRequiredMixin,UpdateView):
+class BirthdayUpdateView(LoginRequiredMixin, UpdateView):
     model = Birthday
     form_class = BirthdayForm
 
 
-class BirthdayDeleteView(LoginRequiredMixin,DeleteView):
+class BirthdayDeleteView(LoginRequiredMixin, DeleteView):
     model = Birthday
     success_url = reverse_lazy('birthday:list')
 
