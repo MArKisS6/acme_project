@@ -3,10 +3,18 @@ from django.views.generic import (
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 from .forms import BirthdayForm
 from .models import Birthday
 from .utils import calculate_birthday_countdown
+
+
+class OnlyAuthorMixin(UserPassesTestMixin):
+
+    def test_func(self):
+        object = self.get_object()
+        return object.author == self.request.user
 
 
 class BirthdayListView(ListView):
@@ -18,7 +26,7 @@ class BirthdayListView(ListView):
 class BirthdayCreateView(LoginRequiredMixin, CreateView):
     model = Birthday
     form_class = BirthdayForm
-    
+
     def form_valid(self, form):
         # Присвоить полю author объект пользователя из запроса.
         form.instance.author = self.request.user
@@ -26,9 +34,17 @@ class BirthdayCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class BirthdayUpdateView(LoginRequiredMixin, UpdateView):
+class BirthdayUpdateView(UserPassesTestMixin, UpdateView):
     model = Birthday
     form_class = BirthdayForm
+
+    def test_func(self):
+        # Получаем текущий объект.
+        object = self.get_object()
+        # Метод вернёт True или False.
+        # Если пользователь - автор объекта, то тест будет пройден.
+        # Если нет, то будет вызвана ошибка 403.
+        return object.author == self.request.user
 
 
 class BirthdayDeleteView(LoginRequiredMixin, DeleteView):
