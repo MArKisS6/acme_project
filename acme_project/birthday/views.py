@@ -15,17 +15,17 @@ class BirthdayListView(ListView):
     paginate_by = 10
 
 
-class BirthdayCreateView(CreateView):
+class BirthdayCreateView(LoginRequiredMixin,CreateView):
     model = Birthday
     form_class = BirthdayForm
 
 
-class BirthdayUpdateView(UpdateView):
+class BirthdayUpdateView(LoginRequiredMixin,UpdateView):
     model = Birthday
     form_class = BirthdayForm
 
 
-class BirthdayDeleteView(DeleteView):
+class BirthdayDeleteView(LoginRequiredMixin,DeleteView):
     model = Birthday
     success_url = reverse_lazy('birthday:list')
 
