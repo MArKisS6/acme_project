@@ -34,20 +34,12 @@ class BirthdayCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class BirthdayUpdateView(UserPassesTestMixin, UpdateView):
+class BirthdayUpdateView(OnlyAuthorMixin, UpdateView):
     model = Birthday
     form_class = BirthdayForm
 
-    def test_func(self):
-        # Получаем текущий объект.
-        object = self.get_object()
-        # Метод вернёт True или False.
-        # Если пользователь - автор объекта, то тест будет пройден.
-        # Если нет, то будет вызвана ошибка 403.
-        return object.author == self.request.user
 
-
-class BirthdayDeleteView(LoginRequiredMixin, DeleteView):
+class BirthdayDeleteView(OnlyAuthorMixin, DeleteView):
     model = Birthday
     success_url = reverse_lazy('birthday:list')
 
