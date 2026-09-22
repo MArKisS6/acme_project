@@ -18,6 +18,12 @@ class BirthdayListView(ListView):
 class BirthdayCreateView(LoginRequiredMixin,CreateView):
     model = Birthday
     form_class = BirthdayForm
+    
+    def form_valid(self, form):
+        # Присвоить полю author объект пользователя из запроса.
+        form.instance.author = self.request.user
+        # Продолжить валидацию, описанную в форме.
+        return super().form_valid(form)
 
 
 class BirthdayUpdateView(LoginRequiredMixin,UpdateView):
